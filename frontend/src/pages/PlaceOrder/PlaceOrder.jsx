@@ -3,7 +3,7 @@ import './PlaceOrder.css'
 
 const PlaceOrder = () => {
   return (
-    <div>
+    <div data-testid="order-page">
       
     </div>
   )
