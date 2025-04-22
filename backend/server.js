@@ -9,7 +9,7 @@ const port = 4000
 
 //middleware
 app.use(express.json())
-app.use (cors())
+app.use(cors())
 
 // db connection
 connectDB();
@@ -17,6 +17,7 @@ connectDB();
 
 // API endpoints
 app.use("/api/food",foodRouter)
+app.use("/images", express.static("uploads"))
 
 
 
@@ -26,7 +27,6 @@ app.get("/",(req,res)=>{
 
 app.listen(port,()=>{
     console.log(`Server Started on http://localhost:${port}`)
-
 
 })
 
