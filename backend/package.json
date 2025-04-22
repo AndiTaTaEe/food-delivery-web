@@ -4,7 +4,10 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "server":"nodemon server.js"
+    "server":"nodemon server.js",
+    "test": "vitest run",
+    "test:watch" : "vitest",
+    "test:coverage" : "vitest run --coverage"
   },
   "author": "",
   "license": "ISC",
