@@ -1,10 +1,13 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
+dotenv.config({ path: '.env.test' });
 
 export async function connectTestDB() {
-    const mongoURI = 'mongodb+srv://Ardeleanu:megastudent@cluster0.4blu9nd.mongodb.net/food-del-test';
+    const mongoURI = process.env.MONGO_TEST_URI;
 
     if (mongoose.connection.readyState === 0) {
-        await mongoose.connect(mongoURI);
+        await mongoose.connect(process.env.MONGO_TEST_URI);
         console.log('Connected to test DB');
     }
 }

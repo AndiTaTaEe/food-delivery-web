@@ -1,7 +1,10 @@
-import {describe, it, expect, beforeAll, afterAll} from 'vitest';
+import {describe, it, expect, afterAll} from 'vitest';
 import mongoose, { mongo } from 'mongoose';
 import {connectDB} from '../config/db.js';
 import { connectTestDB, closeTestDB, clearTestDB } from './utils/db-handler';
+import dotenv from 'dotenv';
+
+dotenv.config({path: '.env.test'});
 
 describe('Database Connection', () => {
    afterAll(async () => {
@@ -10,7 +13,7 @@ describe('Database Connection', () => {
 
    it('connects to MongoDB successfully through connectDB function', async () => {
     const originalEnv = process.env.MONGO_URI;
-    process.env.MONGO_URI = 'mongodb+srv://Ardeleanu:megastudent@cluster0.4blu9nd.mongodb.net/food-del-test';
+    process.env.MONGO_URI = process.env.MONGO_TEST_URI;// Use the test DB URI
 
     await connectDB();
 
