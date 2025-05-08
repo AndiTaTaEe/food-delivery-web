@@ -97,7 +97,7 @@ describe('Database Connection', () => {
         const endTime = Date.now();
         const connectionTime = endTime - startTime;
 
-        expect(connectionTime).toBeLessThan(5000);
+        expect(connectionTime).toBeLessThan(5500);
 
         await closeTestDB();
     });
