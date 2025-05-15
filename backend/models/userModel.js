@@ -5,7 +5,8 @@ const userSchema = new mongoose.Schema({
     email: {type:String, required:true, unique: true},
     password:{type:String, required:true},
     cartData: {type:Object, default: {}}
+// Prevents empty objects in 'cartData' from being removed
 }, {minimize: false})
 
-const userModel = mongoose.model.user || mongoose.model("user", userSchema);
+const userModel = mongoose.models.user || mongoose.model("user", userSchema);
 export default userModel;
