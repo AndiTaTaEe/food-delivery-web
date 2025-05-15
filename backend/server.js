@@ -3,6 +3,8 @@ import cors from "cors"
 import { connectDB } from "./config/db.js"
 import foodRouter from "./routes/foodRoute.js"
 import mongoose from "mongoose"
+import userRouter from "./routes/userRoute.js"
+import 'dotenv/config'
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 const port = process.env.PORT || 4000;
@@ -18,6 +20,8 @@ app.use(cors())
 // API endpoints
 app.use("/api/food",foodRouter)
 app.use("/images", express.static("uploads"))
+app.use("/api/user", userRouter);
+
 
 app.get("/",(req,res)=>{
     res.send("API Working")
