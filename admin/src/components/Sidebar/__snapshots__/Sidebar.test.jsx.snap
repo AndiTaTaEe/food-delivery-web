@@ -1,0 +1,54 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Snapshot testing > matches the snapshot 1`] = `
+<div>
+  <div
+    class="sidebar"
+    data-testid="mock-sidebar"
+  >
+    <div
+      class="sidebar-options"
+    >
+      <a
+        class="sidebar-option"
+        data-discover="true"
+        href="/add"
+      >
+        <img
+          alt=""
+          src="/mock-path/add_icon.png"
+        />
+        <p>
+          Add Items
+        </p>
+      </a>
+      <a
+        class="sidebar-option"
+        data-discover="true"
+        href="/list"
+      >
+        <img
+          alt=""
+          src="/mock-path/order_icon.png"
+        />
+        <p>
+          List Items
+        </p>
+      </a>
+      <a
+        class="sidebar-option"
+        data-discover="true"
+        href="/orders"
+      >
+        <img
+          alt=""
+          src="/mock-path/order_icon.png"
+        />
+        <p>
+          Orders
+        </p>
+      </a>
+    </div>
+  </div>
+</div>
+`;
