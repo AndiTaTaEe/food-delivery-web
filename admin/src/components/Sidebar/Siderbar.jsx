@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 
 const Siderbar = () => {
   return (
-    <div className='sidebar'>
+    <div className='sidebar' data-testid="mock-sidebar">
       <div className="sidebar-options">
         <NavLink to='/add' className="sidebar-option">
           <img src={assets.add_icon} alt="" />
