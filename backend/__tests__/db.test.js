@@ -1,10 +1,18 @@
-import {describe, it, expect, afterAll} from 'vitest';
+import {describe, it, expect, afterAll, beforeAll} from 'vitest';
 import mongoose, { mongo } from 'mongoose';
 import {connectDB} from '../config/db.js';
 import { connectTestDB, closeTestDB, clearTestDB } from './utils/db-handler';
 import dotenv from 'dotenv';
 
 dotenv.config({path: '.env.test'});
+
+beforeAll(() => {
+    console.log("Test MongoDB URI:", process.env.MONGO_TEST_URI);
+    if(!process.env.MONGO_TEST_URI) {
+        process.env.MONGO_TEST_URI = 'mongodb://localhost:27017/food-del-test'; // Fallback for local testing
+    }
+})
+
 
 describe('Database Connection', () => {
    afterAll(async () => {
