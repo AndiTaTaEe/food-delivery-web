@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { describe, it, expect, vi } from "vitest";
-import Navbar from "./Navbar";
+import Navbar from "./Navbar.jsx";
 import { MemoryRouter, Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
 import { StoreContext } from "../../context/StoreContext";
