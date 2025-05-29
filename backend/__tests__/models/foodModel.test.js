@@ -6,6 +6,14 @@ import {
   clearTestDB,
 } from "../utils/db-handler.js";
 
+beforeAll(() => {
+    console.log("Test MongoDB URI:", process.env.MONGO_TEST_URI);
+    if(!process.env.MONGO_TEST_URI) {
+        process.env.MONGO_TEST_URI = 'mongodb://localhost:27017/food-del-test'; // Fallback for local testing
+    }
+})
+
+
 describe("Food Model tests", () => {
   beforeAll(async () => {
     await connectTestDB();
