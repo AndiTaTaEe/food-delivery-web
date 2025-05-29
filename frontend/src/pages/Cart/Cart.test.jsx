@@ -50,6 +50,7 @@ const mockStoreContext = {
     },
   ],
   removeFromCart: vi.fn(),
+  getTotalCartAmmount: vi.fn(() => 40)
 };
 
 const getCartItemContainer = (foodItem, cartItems) => {

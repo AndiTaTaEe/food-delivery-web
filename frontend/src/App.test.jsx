@@ -14,7 +14,8 @@ const mockStoreContext = {
     food_list: [],
     cartItems: {},
     addToCart: vi.fn(),
-    removeFromCart: vi.fn()
+    removeFromCart: vi.fn(),
+    getTotalCartAmmount: vi.fn(() => 0)
 }
 
 const renderApp = (path) => {

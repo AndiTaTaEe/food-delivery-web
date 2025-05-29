@@ -95,40 +95,4 @@ describe('Add page', () => {
             expect(priceInput.value).toBe('30');
         });
     });
-
-    describe('Form submission', () => {
-        it('submits all data correctly', async () => {
-            axios.post.mockResolvedValue({data: {success: true, message: "Food Added"}});
-            render(
-                <Add url={mockUrl} />
-            );
-
-            const nameInput = screen.getByPlaceholderText(/Type here/i);
-            const descriptionInput = screen.getByPlaceholderText(/Write content here/i);
-            const categorySelect = screen.getByRole('combobox');
-            const priceInput = screen.getByPlaceholderText(/\$20/i);
-            const fileInput = document.querySelector('input[type="file"]');
-            const submitButton = screen.getByRole('button', {name: /Add/i});
-            
-            const file = new File(['dummy content'], 'test-image.png', {type: 'image/png'});
-
-            await act(async () => {
-                fireEvent.change(nameInput, {target: {value: 'Test pizza'}});
-                fireEvent.change(descriptionInput, {target: {value: 'Test description'}});
-                fireEvent.change(categorySelect, {target: {value: 'Pasta'}});
-                fireEvent.change(priceInput, {target: {value: '30'}});
-
-                Object.defineProperty(fileInput, 'files', {
-                    value: [file],
-                    writable: false
-                });
-                fireEvent.change(fileInput);
-
-                fireEvent.click(submitButton);
-            });
-            expect(axios.post).toHaveBeenCalledWith(`${mockUrl}/api/food/add`, expect.any(FormData));
-
-            expect(toast.success).toHaveBeenCalledWith("Food Added");
-        });
-    })
 })

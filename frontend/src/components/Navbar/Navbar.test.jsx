@@ -5,12 +5,15 @@ import { describe, it, expect, vi } from "vitest";
 import Navbar from "./Navbar";
 import { MemoryRouter, Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
+import { StoreContext } from "../../context/StoreContext";
 
 const renderNavbar = (setShowLogin) => {
   render(
+    <StoreContext.Provider value={mockStoreContext}>
     <MemoryRouter>
       <Navbar setShowLogin={setShowLogin} />
     </MemoryRouter>
+    </StoreContext.Provider>
   );
 };
 
@@ -22,6 +25,34 @@ const getNavLinks = () => ({
 }); //functie pentru returnarea linkurilor din navbar
 
 const getBasketIcon = () => screen.getByAltText("basket-icon");
+
+const mockStoreContext = {
+  cartItems: {
+    1: 2,
+    2: 0,
+    3: 1,},
+  food_list: [
+    {
+      _id: 1,
+      name: "Pizza",
+      category: "Italian",
+      description: "Delicious cheese pizza",
+      price: 12.99,
+      image: "pizza.jpg",
+    },
+    {
+      _id: 2,
+      name: "Burger",
+      category: "American",
+      description: "Juicy beef burger",
+      price: 10.99,
+      image: "burger.jpg",
+    }
+  ],
+  removeFromCart: vi.fn(),
+  getTotalCartAmmount: vi.fn(() => 42)
+};
+
 
 
 describe("Navbar Component", () => {
@@ -78,9 +109,11 @@ describe("Navbar Component", () => {
     const history = createMemoryHistory({initialEntries: ["/"]});
 
     render (
+      <StoreContext.Provider value={mockStoreContext}>
       <Router location={history.location} navigator={history}>
         <Navbar setShowLogin={mockSetShowLogin} />
       </Router>
+      </StoreContext.Provider>
     );
 
     const basketIcon = getBasketIcon();
