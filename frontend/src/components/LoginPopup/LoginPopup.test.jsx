@@ -4,12 +4,24 @@ import "@testing-library/jest-dom";
 import { describe, it, expect, vi} from "vitest";
 import { MemoryRouter } from "react-router-dom";
 import LoginPopup from "./LoginPopup";
+import { StoreContext } from "../../context/StoreContext";
+
+const mockStoreContext = {
+    cartItems: {},
+    food_list: [],
+    url: "http://localhost:4000",
+    getTotalCartAmmount: vi.fn(() => 0),
+    addToCart: vi.fn(),
+    removeFromCart: vi.fn(),
+};
 
 const renderLoginPopup = (setShowLogin) => {
     render(
+        <StoreContext.Provider value={mockStoreContext}>
         <MemoryRouter>
             <LoginPopup setShowLogin={setShowLogin} />
         </MemoryRouter>
+        </StoreContext.Provider>
     );
 };
 
