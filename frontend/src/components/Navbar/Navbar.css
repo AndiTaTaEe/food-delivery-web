@@ -27,7 +27,7 @@
     background: transparent;
     font-size: 16px;
     color: #49557e;
-    border: 1px solid tomato;
+    border: 1px solid #86a3ff;
     padding: 10px 30px;
     border-radius: 50px;
     cursor: pointer;
@@ -36,7 +36,7 @@
 }
 
 .navbar button:hover {
-    background-color: #fff4f2;
+    background-color: #f2faff;
 }
 
 .navbar .active {
@@ -59,7 +59,7 @@
     position: absolute;
     min-width: 10px;
     min-height: 10px;
-    background-color: tomato;
+    background-color: #86a3ff;
     border-radius: 5px;
     top: -8px;
     right: -8px;
@@ -84,7 +84,7 @@
     background-color: #fff2ef;
     padding: 12px 25px;
     border-radius: 4px;
-    border: 1px solid tomato;
+    border: 1px solid #86a3ff;
     outline: 2px solid white;
     list-style: none;
 }
@@ -101,7 +101,7 @@
 }
 
 .nav-profile-dropdown li:hover {
-    color: tomato;
+    color: #86a3ff;
 }
 
 @media (max-width:1050px) {

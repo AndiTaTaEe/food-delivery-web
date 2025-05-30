@@ -58,7 +58,7 @@
 .cart-total button{
     border: none;
     color: white;
-    background-color: tomato;
+    background-color: #86a3ff;
     width: max(15vw,200px);
     padding: 12px 0px;
     border-radius: 4px;
@@ -93,7 +93,29 @@
     border: none;
     color: white;
     border-radius: 4px;
+    cursor: pointer;
 }
+
+.cart-promocode-input button:hover {
+  background-color: #ff3333;
+}
+
+.promo-error {
+  color: #ff3333;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.promo-success {
+  color: #33aa33;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.promo-discount {
+  color: #33aa33;
+}
+
 @media (max-width:750px) {
     .cart-bottom{
         flex-direction: column-reverse;
