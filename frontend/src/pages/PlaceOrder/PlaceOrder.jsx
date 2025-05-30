@@ -8,6 +8,8 @@ const PlaceOrder = () => {
   const { getTotalCartAmmount, token, food_list, cartItems, url } =
     useContext(StoreContext);
 
+  const [appliedPromo, setAppliedPromo] = useState(null);
+
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
@@ -26,6 +28,36 @@ const PlaceOrder = () => {
     setData((data) => ({ ...data, [name]: value }));
   };
 
+  const getDiscountAmount = () => {
+    if(!appliedPromo) return 0;
+
+    const subtotal = getTotalCartAmmount()+2;
+    let discountAmount = 0;
+
+    if(appliedPromo.code === "FREESHIP") {
+      discountAmount = subtotal === 0 ? 0 : 2;
+    } else {
+      discountAmount = subtotal * appliedPromo.discount;
+    }
+    return parseFloat(discountAmount.toFixed(2));
+  }
+
+  const getFinalTotal = () => {
+    const subtotal = getTotalCartAmmount()+2;
+    if(subtotal === 0) return 0;
+    const deliveryFee = 2;
+    const discountAmount = getDiscountAmount();
+
+    let total;
+    if(appliedPromo && appliedPromo.code === "FREESHIP") {
+      total = subtotal;
+    } else {
+      total = subtotal + deliveryFee - discountAmount;
+    }
+    return parseFloat(total.toFixed(2));
+  }
+
+
   const placeOrder = async (event) => {
     event.preventDefault();
     let orderItems = [];
@@ -39,7 +71,9 @@ const PlaceOrder = () => {
     let orderData = {
       address: data,
       items: orderItems,
-      amount: getTotalCartAmmount() + 2, //delivery fee
+      amount: getFinalTotal(), //delivery fee
+      discountCode: appliedPromo ? appliedPromo.code : null,
+      discountAmount: getDiscountAmount()
     }
     let response = await axios.post(url+ "/api/order/place", orderData, {headers: {token}});
     if (response.data.success) {
@@ -60,6 +94,10 @@ const PlaceOrder = () => {
       navigate('/cart');
     }
 
+    const savedPromo = localStorage.getItem("appliedPromo");
+    if(savedPromo) {
+      setAppliedPromo(JSON.parse(savedPromo));
+    }
   }, [token]);
   
   return (
@@ -142,20 +180,36 @@ const PlaceOrder = () => {
           <div>
             <div className="cart-total-details">
               <p>Subtotal</p>
-              <p>${getTotalCartAmmount() === 0 ? 0 : getTotalCartAmmount()}</p>
+              <p>${getTotalCartAmmount()}</p>
             </div>
             <hr />
             <div className="cart-total-details">
               <p>Delivery Fee</p>
-              <p>${getTotalCartAmmount() === 0 ? 0 : 2}</p>
+              <p>${getTotalCartAmmount() === 0 ? 0 : (appliedPromo?.code ==="FREESHIP" ? 0 : 2)}</p>
             </div>
+            {appliedPromo && (
+              <>
+              <hr />
+              <div className="cart-total-details promo-discount">
+                <p>Discount ({appliedPromo.code})</p>
+                <p>-${getDiscountAmount()}</p>
+              </div>
+              </>
+            )
+
+            }
             <hr />
             <div className="cart-total-details">
               <b>Total</b>
               <b>
-                ${getTotalCartAmmount() === 0 ? 0 : getTotalCartAmmount() + 2}
+                ${getFinalTotal()}
               </b>
             </div>
+            {appliedPromo && (
+              <div className="promo-applied">
+                <p>Promo code applied: <span>{appliedPromo.code}</span></p>
+              </div>
+            )}
           </div>
           <button type="submit">PROCEED TO PAYMENT</button>
         </div>

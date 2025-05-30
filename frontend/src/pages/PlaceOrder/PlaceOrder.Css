@@ -23,7 +23,7 @@
     padding: 10px;
     border: 1px solid #c5c5c5;
     border-radius: 4px;
-    outline-color: tomato;
+    outline-color: #86a3ff;
 }
 
 .place-order-left .multi-fields{
@@ -38,4 +38,21 @@
 }
 .place-order .cart-total button{
     margin-top: 30px;
+}
+
+.promo-discount {
+  color: #33aa33;
+}
+
+.promo-applied {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #f8f8f8;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.promo-applied span {
+  font-weight: bold;
+  color: #ff4d4d;
 }
