@@ -59,7 +59,7 @@ const Cart = () => {
   }
 
   const getFinalTotal = () => {
-    const subtotal = getTotalCartAmmount()+2;
+    const subtotal = getTotalCartAmmount();
     if(subtotal === 0) return 0;
     const deliveryFee = 2;
     const discountAmount = getDiscountAmount();
@@ -73,12 +73,12 @@ const Cart = () => {
     return parseFloat(total.toFixed(2));
   }
 
-  /*useEffect(() => {
+  useEffect(() => {
     const savedPromo = localStorage.getItem("appliedPromo");
     if(savedPromo) {
       setAppliedPromo(JSON.parse(savedPromo));
     }
-  }, []);*/
+  }, []);
 
   return (
     <div className="cart" data-testid="cart-page">
