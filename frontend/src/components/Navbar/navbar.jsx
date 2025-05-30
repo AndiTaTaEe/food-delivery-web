@@ -12,6 +12,7 @@ const Navbar = ({ setShowLogin }) => {
 
   const logOut = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("appliedPromo");
     setToken("");
     navigate("/");
   }

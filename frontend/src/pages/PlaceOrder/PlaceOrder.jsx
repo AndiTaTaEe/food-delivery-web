@@ -43,7 +43,7 @@ const PlaceOrder = () => {
   }
 
   const getFinalTotal = () => {
-    const subtotal = getTotalCartAmmount()+2;
+    const subtotal = getTotalCartAmmount();
     if(subtotal === 0) return 0;
     const deliveryFee = 2;
     const discountAmount = getDiscountAmount();
@@ -77,6 +77,7 @@ const PlaceOrder = () => {
     }
     let response = await axios.post(url+ "/api/order/place", orderData, {headers: {token}});
     if (response.data.success) {
+      localStorage.removeItem("appliedPromo");
       const {session_url} = response.data;
       window.location.replace(session_url);
     } else {
